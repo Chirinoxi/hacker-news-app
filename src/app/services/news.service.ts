@@ -9,6 +9,7 @@ import { Hit, NewsResponse } from '../interfaces/news-response.interface';
 export class NewsService {
   private baseUrl: string = 'http://hn.algolia.com/api/v1';
   private _hits: Hit[] = [];
+  private _favs: Hit[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -18,6 +19,14 @@ export class NewsService {
 
   public set hits(value: Hit[]) {
     this._hits = value;
+  }
+
+  public get favs(): Hit[] {
+    return this._favs;
+  }
+
+  public set favs(value: Hit[]) {
+    this._favs = value;
   }
 
   public addParameterToUrl(url: URL, key: string, value: string): URL {
@@ -47,7 +56,7 @@ export class NewsService {
     let url = new URL(this.baseUrl + '/search_by_date?');
     url = this.addParameterToUrl(url, 'query', query);
     url = this.addParameterToUrl(url, 'page', page.toString());
-    url = this.addParameterToUrl(url, 'hitsPerPage', '150');
+    url = this.addParameterToUrl(url, 'hitsPerPage', '6');
     return this.http.get<NewsResponse>(url.toString());
   }
 }
