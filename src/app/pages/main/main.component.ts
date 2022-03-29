@@ -14,6 +14,7 @@ export class MainComponent implements OnInit {
 
   constructor(private newsService: NewsService) {
     this.selectedOption = JSON.parse(localStorage.getItem('selectedOption')!) || 'angular';
+    this.newsService.favs = JSON.parse(localStorage.getItem('favs')!) || [];
   }
 
   ngOnInit(): void {
