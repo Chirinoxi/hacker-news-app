@@ -7,6 +7,7 @@ import { ComponentsModule } from './components/components.module';
 import { HttpClientModule } from '@angular/common/http';
 import { PagesModule } from './pages/pages.module';
 import { FormsModule } from '@angular/forms';
+import { AppRouterModule } from './app-router/app-router.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,6 +15,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    AppRouterModule,
     ComponentsModule,
     PagesModule,
     SharedModule,
