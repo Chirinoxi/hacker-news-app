@@ -1,18 +1,16 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Hit } from '../../interfaces/news-response.interface';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css']
+  styleUrls: ['./card.component.css'],
 })
-export class CardComponent implements OnInit {
-
+export class CardComponent {
   @Input() hit!: Hit;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  public redirectToURL(url: any){
+    if(url != null) window.open(url);
   }
-
 }

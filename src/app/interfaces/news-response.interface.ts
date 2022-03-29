@@ -22,7 +22,7 @@ export interface Hit {
   num_comments:     null;
   story_id:         number;
   story_title:      string;
-  story_url:        null | string;
+  story_url?:        null | string;
   parent_id:        number;
   created_at_i:     number;
   _tags:            string[];
