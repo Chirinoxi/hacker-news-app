@@ -12,7 +12,9 @@ export class MainComponent implements OnInit {
 
   @Input() selectedOption: string = this._options[0];
 
-  constructor(private newsService: NewsService) {}
+  constructor(private newsService: NewsService) {
+    this.selectedOption = JSON.parse(localStorage.getItem('selectedOption')!) || 'angular';
+  }
 
   ngOnInit(): void {
     this.newsService.obtainHackerNews(this.selectedOption, 0).subscribe(({ hits }) => {
@@ -22,7 +24,9 @@ export class MainComponent implements OnInit {
   }
 
   public searchNews() {
-    // Probaremos con página 0 por el momento !
+    // We store the selected option in our localStorage
+    localStorage.setItem('selectedOption', JSON.stringify(this.selectedOption));
+    // We test with the page number 0 by the moment
     this.newsService.obtainHackerNews(this.selectedOption, 0)
       .subscribe(
         (response) => { 
