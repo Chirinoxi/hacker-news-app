@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Hit } from '../../interfaces/news-response.interface';
+import { NewsService } from '../../services/news.service';
 
 @Component({
   selector: 'app-card',
@@ -8,9 +9,20 @@ import { Hit } from '../../interfaces/news-response.interface';
 })
 export class CardComponent {
   @Input() hit!: Hit;
-  constructor() {}
+  @Input() index!: number;
+  @Input() modeFav!: boolean;
 
-  public redirectToURL(url: any){
+  constructor(private newsService: NewsService) {}
+
+  public redirectToURL(url: any): void{
     if(url != null) window.open(url);
+  }
+
+  public addToFavourites(index: number): void{
+    // We obtain the i-th hit.
+    const hit = this.newsService.hits[index];
+    // We add the obtained hit into the favs array
+    this.newsService.favs.push(hit);
+    localStorage.setItem('favs', JSON.stringify(this.newsService.favs));
   }
 }
