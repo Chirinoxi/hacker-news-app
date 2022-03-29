@@ -9,6 +9,7 @@ import { Hit } from 'src/app/interfaces/news-response.interface';
 export class GridComponent implements OnInit {
 
   @Input() hits!:Hit[];
+  @Input() modeFav!:boolean;
 
   constructor() { }
 
