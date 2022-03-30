@@ -8,24 +8,31 @@ import { Hit } from '../../interfaces/news-response.interface';
   styleUrls: [],
 })
 export class MainComponent implements OnInit {
-  private _options: string[] = ['angular', 'reactjs', 'vuejs'];
+  private _options: string[] = [
+    'Select your news',
+    'angular',
+    'reactjs',
+    'vuejs',
+  ];
   private _page: number = 0;
 
   @Input() selectedOption: string = this._options[0];
 
   constructor(private newsService: NewsService) {
-    this.selectedOption = JSON.parse(localStorage.getItem('selectedOption')!) || 'angular';
+    this.selectedOption =
+      JSON.parse(localStorage.getItem('selectedOption')!) || 'angular';
     this.newsService.favs = JSON.parse(localStorage.getItem('favs')!) || [];
   }
 
   ngOnInit(): void {
+    // By default we search the angular news !
     this.newsService
-      .obtainHackerNews(this.selectedOption, this._page)
-        .subscribe(({ hits }) => {
-          hits = hits.filter(this.newsService.filterData).slice(0, 8);
-          this.newsService.hits = hits;
-          this.page += 1;
-        });
+      .obtainHackerNews(this._options[1], this._page)
+      .subscribe(({ hits }) => {
+        hits = hits.filter(this.newsService.filterData).slice(0, 8);
+        this.newsService.hits = hits;
+        this.page += 1;
+      });
   }
 
   public get page(): number {
@@ -44,34 +51,43 @@ export class MainComponent implements OnInit {
     return this.newsService.hits;
   }
 
-  public searchByPage() {
-    console.log('Buscando página: ', this._page);
-    this.newsService.obtainHackerNews(this.selectedOption, this._page)
-      .subscribe(
-        (response) => {
+  public searchByPage(): void {
+    if (this.selectedOption != this._options[0]) {
+      console.log('Buscando página: ', this._page);
+      this.newsService
+        .obtainHackerNews(this.selectedOption, this._page)
+        .subscribe((response) => {
           // Filter the new hits and then we only obtain the first eight ones
-          const hits = response.hits.filter(this.newsService.filterData).slice(0, 8);
+          const hits = response.hits
+            .filter(this.newsService.filterData)
+            .slice(0, 8);
           // We DON'T touch the previous hits !
           const oldHits = this.newsService.hits;
           this.newsService.hits = oldHits.concat(hits);
-        }
-      );
-    this._page += 1;
+        });
+      this._page += 1;
+    }
   }
 
-  public searchNews() {
-    // We reset our page counter !
-    this._page = 0;
+  /**
+   * Function destinated to search news using our current selectedOption
+   * (except when Select your news option it's selected),  
+   */
+  public searchNews(): void {
     // We store the selected option in our localStorage
     localStorage.setItem('selectedOption', JSON.stringify(this.selectedOption));
-    // We test with the page number 0 by the moment
-    this.newsService
-      .obtainHackerNews(this.selectedOption, this._page)
-      .subscribe((response) => {
-        this.newsService.hits = response.hits
-                                    .filter(this.newsService.filterData)
-                                        .slice(0, 8);
-        this._page += 1;
-      });
+    if (this.selectedOption != this._options[0]) {
+      // We reset our page counter !
+      this._page = 0;
+      // We test with the page number 0 by the moment
+      this.newsService
+        .obtainHackerNews(this.selectedOption, this._page)
+        .subscribe((response) => {
+          this.newsService.hits = response.hits
+            .filter(this.newsService.filterData)
+            .slice(0, 8);
+          this._page += 1;
+        });
+    }
   }
 }
