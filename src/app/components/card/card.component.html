@@ -1,0 +1,30 @@
+<div class="grid grid-cols-9 bg-white rounded border border-gray-400 hover:opacity-50">
+    <div class="col-span-7 xl:col-span-8 p-4 overflow-hidden cursor-pointer" (click)="redirectToURL(hit.story_url)">
+        <div class="flex flex-row justify-left items-center">
+            <img src="../../../assets/images/iconmonstr-time-2.svg" alt="clock.svg" class="w-3 h-3">
+            <h4 class="author-text p-1">{{calculeDifferenceBetweendDates(hit.created_at) | number}} hours ago by
+                {{hit.author | titlecase}} </h4>
+        </div>
+        <p class="text-sm font-[520] pt-1">
+            {{hit.story_title}}
+        </p>
+    </div>
+    <div class="flex items-center justify-center col-span-2 xl:col-span-1 bg-gray-100 cursor-pointer">
+        <span *ngIf="(!modeFav && !foundHitInFavourites(hit)); else hitInFavourite" class="p-4">
+            <img src="../../../assets/images/iconmonstr-favorite-2.svg" alt="heart.jpg" class="w-5 h-6"
+                (click)="addToFavourites(index)">
+        </span>
+        <ng-template #hitInFavourite>
+            <span *ngIf="!modeFav && foundHitInFavourites(hit); else favouriteIcon" class="p-4">
+                <img src="../../../assets/images/iconmonstr-favorite-3.svg" alt="heart.jpg"
+                    class="w-5 h-6" (click)="deleteFromFavourites(hit)">
+            </span>
+        </ng-template>
+        <ng-template #favouriteIcon>
+            <span class="p-4">
+                <img src="../../../assets/images/iconmonstr-favorite-3.svg" alt="heart.jpg"
+                    class="w-5 h-6" (click)="deleteFromFavourites(hit)">
+            </span>
+        </ng-template>
+    </div>
+</div>

@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Baskervville&display=swap");
+
+.card-text {
+    font-family: 'Roboto', Roboto;
+    color: #6b6b6b;
+  }
+
+.author-text {
+    font-family: 'Roboto', Roboto;
+    font-size: 11px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #767676;
+}
+
+.main-content {
+    font-family: 'Roboto', Roboto;
+    color: #606060;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

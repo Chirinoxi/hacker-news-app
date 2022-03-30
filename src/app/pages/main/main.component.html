@@ -1,0 +1,34 @@
+<!-- Dropdown list -->
+<div class="flex flex-col">
+    <div class="mx-auto lg:ml-20">
+        <select class="form-select appearance-none
+                        block
+                        w-48
+                        px-3
+                        py-1.5
+                        text-base
+                        font-normal
+                        text-gray-700
+                        bg-white bg-clip-padding bg-no-repeat
+                        border border-solid border-gray-300
+                        rounded
+                        transition
+                        ease-in-out
+                        m-0
+                        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" id="options"
+            name="options" [(ngModel)]="selectedOption" (change)="searchNews()">
+            <img src="../../../assets/images/heart-svgrepo-com.svg" class="w-3 h-3">
+            <option *ngFor="let option of options; let i = index" value={{option}} class="flex flex-col">
+                {{options[i] | titlecase}}
+            </option>
+        </select>
+    </div>
+    <app-grid [hits]="hits" [modeFav]="false"></app-grid>
+    <div class="flex flex-col items-center">
+        <button
+            class="bg-transparent hover:bg-[#1797ff] text-[#1797ff] font-medium hover:text-white py-2 px-4 mb-4 border border-[#1797ff] hover:border-transparent rounded"
+            (click)="searchByPage()">
+            Load more news
+        </button>
+    </div>
+</div>
