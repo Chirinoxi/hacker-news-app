@@ -8,7 +8,9 @@ import { NewsService } from 'src/app/services/news.service';
   styleUrls: ['./favs.component.css'],
 })
 export class FavsComponent {
-  constructor(private newsService: NewsService) {}
+  constructor(private newsService: NewsService) {
+    this.newsService.favs = JSON.parse(localStorage.getItem('favs')!) || [];
+  }
 
   public get favs(): Hit[] {
     return this.newsService.favs;
