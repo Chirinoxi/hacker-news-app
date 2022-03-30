@@ -4,13 +4,20 @@ import { MainComponent } from './main/main.component';
 import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { FavsComponent } from './favs/favs.component';
-import { RouterModule } from '@angular/router';
 import { AppRouterModule } from '../app-router/app-router.module';
 
 @NgModule({
   declarations: [MainComponent, FavsComponent],
-  imports: [CommonModule, FormsModule, AppRouterModule, ComponentsModule, SharedModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    HttpClientModule,
+    AppRouterModule,
+    ComponentsModule,
+    SharedModule,
+  ],
   exports: [MainComponent],
 })
 export class PagesModule {}
