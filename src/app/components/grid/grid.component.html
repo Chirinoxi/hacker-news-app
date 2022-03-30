@@ -1,6 +1,6 @@
 <div class="grid gap-10 grid-cols-1 grid-rows-8 p-20 lg:grid-cols-2 lg:grid-rows-4">
-    <div *ngFor="let hit of hits; let i = index">
-        <app-card class="h-full"
+    <div *ngFor="let hit of hits; let i = index" class="h-full">
+        <app-card 
                   [hit]="hit"
                   [index]="i"
                   [modeFav]="modeFav"></app-card>
