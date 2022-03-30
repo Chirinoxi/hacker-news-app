@@ -7,7 +7,7 @@ import { Hit, NewsResponse } from '../interfaces/news-response.interface';
   providedIn: 'root',
 })
 export class NewsService {
-  private baseUrl: string = 'http://hn.algolia.com/api/v1';
+  private baseUrl: string = 'https://hn.algolia.com/api/v1';
   private _hits: Hit[] = [];
   private _favs: Hit[] = [];
 
