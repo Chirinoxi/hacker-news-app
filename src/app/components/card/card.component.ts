@@ -5,7 +5,7 @@ import { NewsService } from '../../services/news.service';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.css'],
+  styleUrls: [],
 })
 export class CardComponent {
   @Input() hit!: Hit;
@@ -37,18 +37,19 @@ export class CardComponent {
 
   /**
    * Function destinad to verify if two Hit objects are equals, in this case we check 4 parameters define if these objects are equals.
-   * 
-   * @param firstHit 
-   * @param secondHit 
-   * @returns 
+   *
+   * @param firstHit
+   * @param secondHit
+   * @returns
    */
-  public equals(firstHit: Hit, secondHit: Hit){
-    if( (firstHit.author === secondHit.author) &&
-        (firstHit.story_title === secondHit.story_title) &&
-        (firstHit.story_url === secondHit.story_url) &&
-        (firstHit.created_at === secondHit.created_at)
-      ){
-        return true;
+  public equals(firstHit: Hit, secondHit: Hit) {
+    if (
+      firstHit.author === secondHit.author &&
+      firstHit.story_title === secondHit.story_title &&
+      firstHit.story_url === secondHit.story_url &&
+      firstHit.created_at === secondHit.created_at
+    ) {
+      return true;
     }
     return false;
   }
@@ -58,7 +59,7 @@ export class CardComponent {
     for (let index = 0; index < this.newsService.favs.length; index++) {
       let fav = this.newsService.favs[index];
       // We verify if the current hit it's equals to our current fav element !
-      let hitsEquals = this.equals(fav,hit);
+      let hitsEquals = this.equals(fav, hit);
       if (hitsEquals) {
         // If the current hit already exists in favourites, we return true !
         return true;
@@ -69,6 +70,9 @@ export class CardComponent {
   }
 
   public deleteFromFavourites(hit: Hit) {
-    console.log('deleteFromFavourites');
+    const newFavs = this.newsService
+                      .favs.filter((item) => !this.equals(hit, item));
+    this.newsService.favs = newFavs;
+    localStorage.setItem('favs', JSON.stringify(this.newsService.favs));
   }
 }

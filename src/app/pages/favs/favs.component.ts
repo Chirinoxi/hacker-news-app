@@ -5,7 +5,7 @@ import { NewsService } from 'src/app/services/news.service';
 @Component({
   selector: 'app-favs',
   templateUrl: './favs.component.html',
-  styleUrls: ['./favs.component.css'],
+  styleUrls: [],
 })
 export class FavsComponent {
   constructor(private newsService: NewsService) {

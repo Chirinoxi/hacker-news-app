@@ -5,10 +5,11 @@ import { Hit } from '../../interfaces/news-response.interface';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css'],
+  styleUrls: [],
 })
 export class MainComponent implements OnInit {
   private _options: string[] = ['angular', 'reactjs', 'vuejs'];
+  private _page: number = 0;
 
   @Input() selectedOption: string = this._options[0];
 
@@ -18,21 +19,21 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.newsService.obtainHackerNews(this.selectedOption, 0).subscribe(({ hits }) => {
-      hits = hits.filter(this.newsService.filterData);
-      this.newsService.hits = hits;
-    });
+    this.newsService
+      .obtainHackerNews(this.selectedOption, this._page)
+        .subscribe(({ hits }) => {
+          hits = hits.filter(this.newsService.filterData).slice(0, 8);
+          this.newsService.hits = hits;
+          this.page += 1;
+        });
   }
 
-  public searchNews() {
-    // We store the selected option in our localStorage
-    localStorage.setItem('selectedOption', JSON.stringify(this.selectedOption));
-    // We test with the page number 0 by the moment
-    this.newsService.obtainHackerNews(this.selectedOption, 0)
-      .subscribe(
-        (response) => { 
-          this.newsService.hits = response.hits.filter(this.newsService.filterData);
-      });
+  public get page(): number {
+    return this._page;
+  }
+
+  public set page(value: number) {
+    this._page = value;
   }
 
   public get options(): string[] {
@@ -41,5 +42,36 @@ export class MainComponent implements OnInit {
 
   public get hits(): Hit[] {
     return this.newsService.hits;
+  }
+
+  public searchByPage() {
+    console.log('Buscando página: ', this._page);
+    this.newsService.obtainHackerNews(this.selectedOption, this._page)
+      .subscribe(
+        (response) => {
+          // Filter the new hits and then we only obtain the first eight ones
+          const hits = response.hits.filter(this.newsService.filterData).slice(0, 8);
+          // We DON'T touch the previous hits !
+          const oldHits = this.newsService.hits;
+          this.newsService.hits = oldHits.concat(hits);
+        }
+      );
+    this._page += 1;
+  }
+
+  public searchNews() {
+    // We reset our page counter !
+    this._page = 0;
+    // We store the selected option in our localStorage
+    localStorage.setItem('selectedOption', JSON.stringify(this.selectedOption));
+    // We test with the page number 0 by the moment
+    this.newsService
+      .obtainHackerNews(this.selectedOption, this._page)
+      .subscribe((response) => {
+        this.newsService.hits = response.hits
+                                    .filter(this.newsService.filterData)
+                                        .slice(0, 8);
+        this._page += 1;
+      });
   }
 }

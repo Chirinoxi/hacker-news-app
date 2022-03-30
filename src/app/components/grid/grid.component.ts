@@ -1,19 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Hit } from 'src/app/interfaces/news-response.interface';
+import { NewsService } from '../../services/news.service';
 
 @Component({
   selector: 'app-grid',
   templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.css']
+  styleUrls: [],
 })
-export class GridComponent implements OnInit {
+export class GridComponent {
+  @Input() public hits!: Hit[];
+  @Input() public modeFav!: boolean;
 
-  @Input() hits!:Hit[];
-  @Input() modeFav!:boolean;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  constructor(private newsService: NewsService) {}
 }
