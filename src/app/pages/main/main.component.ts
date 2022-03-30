@@ -26,13 +26,15 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     // By default we search the angular news !
-    this.newsService
-      .obtainHackerNews(this._options[1], this._page)
-      .subscribe(({ hits }) => {
-        hits = hits.filter(this.newsService.filterData).slice(0, 8);
-        this.newsService.hits = hits;
-        this.page += 1;
-      });
+    if (this.selectedOption != this._options[0]){
+      this.newsService
+        .obtainHackerNews(this.selectedOption, this._page)
+        .subscribe(({ hits }) => {
+          hits = hits.filter(this.newsService.filterData).slice(0, 8);
+          this.newsService.hits = hits;
+          this.page += 1;
+        });
+    }
   }
 
   public get page(): number {
