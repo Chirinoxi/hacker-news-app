@@ -2,14 +2,14 @@
 
 <!-- Options -->
 <div class="mt-10">
-    <ul class="flex flex-row align-center justify-center m-auto font-medium w-64">
-        <li class="flex flex-col items-center border border-2 rounded-l-lg px-4 py-2 w-full cursor-pointer hover:bg-gray-200"
+    <ul class="flex flex-row mx-auto font-medium w-56">
+        <li class="flex flex-col items-center border border-2 rounded-l-lg p-1 w-full cursor-pointer font-medium text-[#606060] hover:bg-gray-200"
             [routerLink]="['/']" 
             [routerLinkActiveOptions]="{exact: true}"
             routerLinkActive="border-[#1797ff] text-[#1797ff]">
             All
         </li>
-        <li class="flex flex-col items-center px-4 py-2 w-full border border-2 rounded-r-lg cursor-pointer hover:bg-gray-200"
+        <li class="flex flex-col items-center p-1 w-full border border-2 rounded-r-lg cursor-pointer font-medium text-[#606060] hover:bg-gray-200"
             [routerLink]="['/my-favs']" routerLinkActive="border-[#1797ff] text-[#1797ff]">
             My Faves
         </li>
@@ -17,7 +17,7 @@
 </div>
 <div class="main-content">
     <!-- main-content flex h-screen -->
-    <div class="m-20 pb-4">
+    <div class="mx-64 py-5">
         <!-- Dropdown list -->
         <router-outlet></router-outlet>
     </div>
