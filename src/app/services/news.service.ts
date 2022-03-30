@@ -56,7 +56,7 @@ export class NewsService {
     let url = new URL(this.baseUrl + '/search_by_date?');
     url = this.addParameterToUrl(url, 'query', query);
     url = this.addParameterToUrl(url, 'page', page.toString());
-    url = this.addParameterToUrl(url, 'hitsPerPage', '6');
+    // We apply a constraint for retrieve only 6 elements in a response !
     return this.http.get<NewsResponse>(url.toString());
   }
 }
