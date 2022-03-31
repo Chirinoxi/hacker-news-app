@@ -1,9 +1,9 @@
 <div class="flex flex-col">
-    <div class="mx-auto lg:ml-20">
+    <div class="w-full mx-auto lg:ml-20">
         <select class="form-select 
                         appearance-none
                         block
-                        w-48
+                        w-24 lg:w-48
                         px-3
                         py-1.5
                         text-base
@@ -14,7 +14,7 @@
                         rounded
                         transition
                         ease-in-out
-                        m-10 md:m-0
+                        my-10 mx-auto md:m-0
                         focus:text-gray-700 
                         focus:bg-white 
                         focus:border-blue-600 
@@ -33,7 +33,10 @@
     <app-grid [hits]="hits" [modeFav]="false"></app-grid>
     <div class="flex flex-col items-center">
         <button
-            class="bg-transparent hover:bg-[#1797ff] text-[#1797ff] font-medium hover:text-white py-2 px-4 mb-4 border border-[#1797ff] hover:border-transparent rounded"
+            class="bg-transparent hover:bg-[#1797ff] text-[#1797ff] 
+                   font-medium hover:text-white py-2 px-4 mb-4 
+                   border border-[#1797ff] 
+                   hover:border-transparent rounded py-2"
             (click)="searchByPage()">
             Load more news
         </button>
