@@ -53,6 +53,10 @@ export class MainComponent implements OnInit {
     return this.newsService.hits;
   }
 
+  /**
+   * Function designated to send HTTP request to HN API, 
+   * but in this case we use an specific page number.
+   */
   public searchByPage(): void {
     if (this.selectedOption != this._options[0]) {
       console.log('Buscando página: ', this._page);
