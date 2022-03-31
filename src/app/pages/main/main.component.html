@@ -1,9 +1,9 @@
 <div class="flex flex-col">
-    <div class="w-full mx-auto lg:ml-20">
-        <select class="form-select 
-                        appearance-none
+    <div class="flex justify-center lg:justify-start 
+    w-full px-auto md:py-10 md:px-20">
+        <select class="form-select
                         block
-                        w-24 lg:w-48
+                        w-32 lg:w-40
                         px-3
                         py-1.5
                         text-base
@@ -12,32 +12,25 @@
                         bg-white bg-clip-padding bg-no-repeat
                         border border-solid border-gray-300
                         rounded
-                        transition
-                        ease-in-out
                         my-10 mx-auto md:m-0
                         focus:text-gray-700 
                         focus:bg-white 
                         focus:border-blue-600 
-                        focus:outline-none" 
-                        id="options"
-                        name="options" 
-                        [(ngModel)]="selectedOption" 
-                        (change)="searchNews()">
-            <option *ngFor="let option of options; let i = index" value={{option}}>
+                        focus:outline-none" id="options" name="options" [(ngModel)]="selectedOption"
+            (change)="searchNews()">
+            <option *ngFor="let option of options; let i = index" value={{option}} class="text-left">
                 <!-- TODO: add frameworks logo's -->
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt="">
+                <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/React-icon.svg" alt=""> -->
                 {{options[i] | titlecase}}
             </option>
         </select>
     </div>
     <app-grid [hits]="hits" [modeFav]="false"></app-grid>
-    <div class="flex flex-col items-center py-5 md:py-2">
-        <button
-            class="bg-transparent hover:bg-[#1797ff] text-[#1797ff] 
+    <div class="flex flex-col items-center pt-10 py-2">
+        <button class="bg-transparent hover:bg-[#1797ff] text-[#1797ff] 
                    font-medium hover:text-white py-2 px-4 mb-4 
                    border border-[#1797ff] 
-                   hover:border-transparent rounded"
-            (click)="searchByPage()">
+                   hover:border-transparent rounded" (click)="searchByPage()">
             Load more news
         </button>
     </div>
