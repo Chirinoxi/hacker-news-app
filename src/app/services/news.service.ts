@@ -13,22 +13,42 @@ export class NewsService {
 
   constructor(private http: HttpClient) {}
 
+  /**
+   * Public get to retrieve _hits variable.
+   */
   public get hits(): Hit[] {
     return this._hits;
   }
 
+  /**
+   * Public set to change _hits variable value.
+   */
   public set hits(value: Hit[]) {
     this._hits = value;
   }
 
+  /**
+   * Public get to retrieve _favs variable.
+   */
   public get favs(): Hit[] {
     return this._favs;
   }
 
+  /**
+   * Public set to change _favs variable value.
+   */
   public set favs(value: Hit[]) {
     this._favs = value;
   }
 
+  /**
+   * This function add some parameter to our baseUrl.
+   * 
+   * @param url: URL object. In this case corresponds to the HN API url.
+   * @param key: name of the added parameter.
+   * @param value: value of the added parameter.
+   * @returns: URL
+   */
   public addParameterToUrl(url: URL, key: string, value: string): URL {
     let _url = url;
     key = encodeURIComponent(key);
@@ -37,6 +57,12 @@ export class NewsService {
     return _url;
   }
 
+  /**
+   * Function designated to verify if a Hit object is appropiated.
+   * 
+   * @param hit: Hit object.
+   * @returns: boolean.
+   */
   public filterData(hit: Hit): boolean {
     if (
       hit.author != null &&
@@ -49,6 +75,13 @@ export class NewsService {
     return false;
   }
 
+  /**
+   * Function designated to send HTTP Request to HN Api
+   * 
+   * @param query: string query.
+   * @param page: page number.
+   * @returns: Observable<NewsResponse>
+   */
   public obtainHackerNews(
     query: string,
     page: number
